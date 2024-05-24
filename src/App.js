@@ -1,13 +1,24 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { useEffect, useState } from "react";
 import TodoBoard from "./components/TodoBoard";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import api from "./utils/api";
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+
+  const getTasks = async () => {
+    const response = await api.get("/tasks");
+    console.log("rrrr", response);
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
   return (
     <Container>
       <Row className="add-item-row">
